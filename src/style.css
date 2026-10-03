@@ -1,0 +1,298 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap");
+:root {
+  font-family: Nunito, system-ui, sans-serif;
+  color: #fff;
+  background: #19152b;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+.hidden {
+  display: none !important;
+}
+#game {
+  position: fixed;
+  inset: 0;
+}
+canvas {
+  display: block;
+}
+.screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 30%, #7268bd88, #211b45 70%),
+    linear-gradient(#82d9ee, #d991c5);
+}
+.forest {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.forest:before,
+.forest:after {
+  content: "✦  🌳   ✧  🌸  ✦   🌲  ✧";
+  position: absolute;
+  bottom: 5%;
+  left: -2%;
+  font-size: 8vw;
+  letter-spacing: 2vw;
+  filter: drop-shadow(0 14px 8px #162742aa);
+}
+.forest:after {
+  bottom: 55%;
+  left: 8%;
+  font-size: 2vw;
+  opacity: 0.65;
+}
+.logo {
+  text-align: center;
+  text-shadow:
+    0 5px 0 #533c87,
+    0 8px 18px #192044;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 5.8rem);
+  line-height: 0.82;
+}
+.logo span {
+  display: block;
+  color: #ffd1ec;
+  font-size: 0.5em;
+  margin-bottom: 0.3em;
+}
+.logo b {
+  color: #bff5ff;
+}
+.card {
+  position: relative;
+  width: min(560px, 92vw);
+  padding: 26px;
+  border: 2px solid #ffffff88;
+  border-radius: 28px;
+  background: #302653e8;
+  box-shadow: 0 20px 70px #18132caa;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+.menu {
+  display: grid;
+  gap: 11px;
+  margin: 28px auto 0;
+  max-width: 360px;
+}
+.primary,
+.secondary {
+  border: 0;
+  border-radius: 15px;
+  padding: 14px 22px;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.15rem;
+  background: linear-gradient(135deg, #ef6eb7, #697eea);
+  box-shadow: 0 5px 0 #4a397f;
+}
+.secondary {
+  background: #4d4976;
+}
+.primary:active,
+.secondary:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #4a397f;
+}
+button:disabled {
+  opacity: 0.45;
+}
+.row {
+  display: flex;
+  gap: 10px;
+}
+.row > * {
+  flex: 1;
+}
+label {
+  display: grid;
+  gap: 5px;
+  text-align: left;
+  margin: 10px 0;
+}
+input,
+select {
+  padding: 12px;
+  border-radius: 11px;
+  border: 2px solid #7c73ae;
+  background: #211b3e;
+  color: #fff;
+}
+#hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+}
+.pill {
+  padding: 8px 14px;
+  border-radius: 99px;
+  background: #201b3cbb;
+  border: 1px solid #ffffff55;
+}
+.hearts {
+  color: #ff79af;
+  font-size: 1.4rem;
+}
+.crosshair {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  font-size: 24px;
+  text-shadow: 0 0 4px #000;
+}
+.hotbar {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  translate: -50%;
+  display: flex;
+  gap: 5px;
+}
+.slot {
+  width: 64px;
+  height: 64px;
+  background: #242044dd;
+  border: 3px solid #8a82b9;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  font-size: 24px;
+}
+.slot.sel {
+  border-color: #ffaad9;
+  translate: 0 -5px;
+  box-shadow: 0 0 18px #ff76cb;
+}
+.slot small {
+  position: absolute;
+  bottom: 2px;
+  right: 5px;
+  font-size: 12px;
+}
+.slot em {
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  font-size: 10px;
+  font-style: normal;
+}
+.toast {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  translate: -50%;
+  padding: 12px 20px;
+  background: #211c43e8;
+  border-radius: 14px;
+  font-weight: 800;
+  text-align: center;
+}
+.panel {
+  position: fixed;
+  z-index: 12;
+  inset: 5% 10%;
+  overflow: auto;
+  background: #272046f5;
+  border: 2px solid #baafff;
+  border-radius: 24px;
+  padding: 24px;
+}
+.recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.recipe {
+  background: #3b3264;
+  border-radius: 15px;
+  padding: 15px;
+}
+.recipe button {
+  width: 100%;
+}
+.close {
+  float: right;
+}
+.help {
+  text-align: left;
+  line-height: 1.7;
+}
+.night {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: #191541;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 2s;
+}
+#breakbar {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  translate: -50%;
+  width: 150px;
+  height: 8px;
+  background: #222;
+  border-radius: 5px;
+  overflow: hidden;
+}
+#breakbar i {
+  display: block;
+  height: 100%;
+  background: #ff79c8;
+  width: 0;
+}
+.title-char {
+  font-size: 3rem;
+  margin-top: 16px;
+}
+.notice {
+  color: #ffd5ef;
+}
+@media (max-height: 650px) {
+  .card {
+    padding: 16px;
+  }
+  .logo {
+    font-size: 2.6rem;
+  }
+  .menu {
+    margin-top: 15px;
+  }
+  .slot {
+    width: 52px;
+    height: 52px;
+  }
+}
